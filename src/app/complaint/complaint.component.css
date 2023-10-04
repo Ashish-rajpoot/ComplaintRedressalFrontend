@@ -1,0 +1,23 @@
+
+.container{
+    border-radius: 10px;
+    width: 400px auto;
+    background-color: rgb(141, 178, 174);
+    padding: 40px;
+    
+}
+.login{
+    padding: 20px;
+
+}
+
+.login h1{
+    font-size: 44px ;
+    font-family: sans-serif;
+    font-weight: bolder;
+    color: rgb(1, 17, 19);
+}
+.downlink{
+    padding: 50px;
+}
+

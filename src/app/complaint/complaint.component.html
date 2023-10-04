@@ -1,0 +1,73 @@
+<div class="container complaint">
+  <div class="row">
+    <div class="col-xl-6 mx-auto">
+      <div class="col-sm-12 mx-auto text-center">
+        <div class="login">
+          <h1>Register Complaint</h1>
+        </div>
+        <form [formGroup]="complaintForm" (ngSubmit)="addComplaint()">
+          <p>
+            <mat-form-field appearance="fill">
+              <mat-label>Provide Email</mat-label>
+              <input
+                matInput
+                placeholder=" Email"
+                type="text"
+                id="email"
+                value="ashish@gmail.com"
+                formControlName="email"
+                (change)="onEmailEnter()"
+              />
+              <mat-icon matSuffix>alternate_email</mat-icon>
+            </mat-form-field>
+          </p>
+
+          <p *ngIf="user | async as user">
+            <mat-form-field appearance="fill">
+              <mat-label>UserName</mat-label>
+              <input
+                matInput
+                placeholder="User Name"
+                type="text"
+                id="username"
+                [value]="user.username"
+                readonly
+              />
+              <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field appearance="fill">
+              <mat-label>Select an option</mat-label>
+              <mat-select id="role" formControlName="assignedTo">
+                <mat-option *ngFor="let role of roles" value="{{ role.id }}">{{
+                  role.rolename
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field class="example-full-width">
+              <mat-label>Leave a comment</mat-label>
+              <textarea
+                matInput
+                placeholder="Ex. It makes me feel..."
+                rows="8"
+                formControlName="description"
+              ></textarea>
+              <mat-icon matSuffix>comment</mat-icon>
+            </mat-form-field>
+          </p>
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="complaintForm.invalid"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

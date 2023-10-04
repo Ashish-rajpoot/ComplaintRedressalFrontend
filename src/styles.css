@@ -1,1 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  /* background: linear-gradient(
+      195deg,
+      rgb(231, 238, 198) 15%,
+      rgb(98, 140, 100)
+    ) */
+    /* no-repeat; */
+  /* min-height:  auto 100%;
+  background-size: cover; */
+}
+mat-form-field{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: transparent;
+  border-radius: 50%;
+}
+mat-form-field input{
+  background:gray transparent;
+}
+
+
+
+.cardshadow{
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px rgba(255,255,255,0.3);
+}
+.contentshadow{
+  height: 300px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px rgba(255,255,255,0.3);
+  background-color: rgb(154, 178, 152);
+}

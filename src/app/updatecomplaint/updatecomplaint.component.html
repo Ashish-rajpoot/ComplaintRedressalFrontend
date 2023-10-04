@@ -1,0 +1,59 @@
+<div mat-dialog-title>
+  <h2>Update Complaint</h2>
+</div>
+
+<div mat-dialog-content>
+  <form
+    [formGroup]="complaintForm"
+    (ngSubmit)="updateComplaint(data.selectedItem.id)"
+  >
+    <!-- <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Provide Email</mat-label>
+        <input
+          matInput
+          placeholder="Email"
+          type="text"
+          id="email"
+          formControlName="email"
+          [value]="data.selectedItem.submittedBy.email"
+        />
+        <mat-icon matSuffix>alternate_email</mat-icon>
+      </mat-form-field>
+    </p> -->
+    <!-- <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Select an option</mat-label>
+        <mat-select id="role" formControlName="assignedTo">
+          <mat-option *ngFor="let role of roles" [value]="role.id">
+            {{ role.rolename }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </p> -->
+
+    <p>
+      <mat-form-field class="example-full-width">
+        <mat-label>Leave a comment</mat-label>
+        <textarea
+          matInput
+          placeholder="Ex. It makes me feel..."
+          rows="8"
+          formControlName="description"
+          [value]="data.selectedItem.description"
+        ></textarea>
+        <mat-icon matSuffix>comment</mat-icon>
+      </mat-form-field>
+    </p>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="complaintForm.invalid"
+    >
+      Update
+    </button>
+    <button mat-raised-button type="button" (click)="exitForm()">Cancel</button>
+  </form>
+</div>

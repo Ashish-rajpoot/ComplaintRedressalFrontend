@@ -1,0 +1,75 @@
+<p class="header">
+  <mat-toolbar color="primary">
+    <button
+      mat-icon-button
+      class="example-icon"
+      aria-label="Example icon-button with menu icon"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>My App</span>
+    <div>
+      <button
+        *ngFor="let link of links"
+        mat-flat-button
+        class="btns"
+        color="primary"
+        routerLink="{{ link.path }}"
+      >
+        {{ link.label }}
+      </button>
+    </div>
+ 
+    <div *ngIf="isLoggedIn">
+      <span *ngFor="let link of loggedInLinks">
+
+        <button
+        *ngIf="hasRole(link.role)"
+        mat-flat-button
+        class="btns"
+        color="primary"
+        [routerLink]="link.path"
+        [disabled]="!hasRole(link.role)"
+        >
+        {{ link.label }}
+      </button>
+    </span>
+    </div>
+    
+
+    <span class="example-spacer"></span>
+    <div *ngIf="isLoggedIn">
+      <button mat-raised-button class="btns" color="primary" (click)="logout()">
+        Logout
+      </button>
+    </div>
+    <div *ngIf="!isLoggedIn">
+      <button mat-raised-button class="btns" color="warn" routerLink="/login">
+        Login
+      </button>
+      <button
+        mat-raised-button
+        class="btns"
+        color="accent"
+        routerLink="/register"
+      >
+        Register
+      </button>
+      {{ role }}
+    </div>
+    <button
+      mat-icon-button
+      class="example-icon favorite-icon"
+      aria-label="Example icon-button with heart icon"
+    >
+      <mat-icon>favorite</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      class="example-icon"
+      aria-label="Example icon-button with share icon"
+    >
+      <mat-icon>share</mat-icon>
+    </button>
+  </mat-toolbar>
+</p>

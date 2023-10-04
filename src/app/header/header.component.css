@@ -1,0 +1,15 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+ 
+.btns{
+  margin: 0px 5px;
+  cursor: pointer;
+}
+
+.header{
+ position: sticky;
+width: 100%;
+z-index: 4;
+top: 0;
+}

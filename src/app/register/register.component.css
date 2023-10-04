@@ -1,0 +1,36 @@
+body{
+    /* background: linear-gradient(145deg, rgb(135, 135, 255),rgba(221, 209, 227, 0.96)); */
+}
+mat-form-field{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: transparent;
+    border-radius: 50%;
+}
+mat-form-field input{
+    background:gray transparent;
+}
+.container{
+    width: 400px auto;
+    padding: 20px 0;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.login{
+    padding: 20px;
+
+}
+
+.login h1{
+    font-size: 44px ;
+    font-family: sans-serif;
+    font-weight: bolder;
+    color: rgb(1, 17, 19);
+}
+.downlink{
+    padding: 50px;
+}
+.register{
+    background-color: rgb(141, 178, 174);
+}

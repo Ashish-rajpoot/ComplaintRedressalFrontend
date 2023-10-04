@@ -1,0 +1,111 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 sidebar">
+      <mat-card
+        class="example-card cardshadow"
+        *ngFor="let item of complaints; let i = index"
+        [ngClass]="{ 'selected-card': i === selectedIndex }"
+        (click)="showContent(item, i)"
+      >
+        <mat-card-header>
+          <mat-card-title-group>
+            <mat-card-title
+              ><strong>Created By : </strong> {{ item.submittedBy.username }}
+            </mat-card-title>
+            <mat-card-subtitle
+              >Pending At :
+              {{
+                item.isResolved == true
+                  ? "Resolved"
+                  : item.assignedTo.rolename
+              }}</mat-card-subtitle
+            >
+          </mat-card-title-group>
+        </mat-card-header>
+      </mat-card>
+    </div>
+    <div class="col-md-8">
+      <mat-card
+        *ngIf="selectedItem && selectedItem != null"
+        style="
+          background: transparent;
+          min-height: 600px auto;
+          background-color: rgb(179, 234, 238);
+        "
+        class="content"
+      >
+        <div style="width: 100%">
+          <mat-card-header>
+            <mat-card-title
+              ><strong>Created By : </strong>
+              {{ selectedItem.submittedBy.username }}
+            </mat-card-title>
+            <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+          </mat-card-header>
+
+          <p></p>
+          <!-- Inside the selected complaint card -->
+          <mat-card-content style="text-align: justify">
+            <h3>
+              At Role :
+              {{
+                selectedItem.assignedTo.rolename === "ROLE_USER"
+                  ? "Resolved"
+                  : selectedItem.assignedTo.rolename
+              }}
+            </h3>
+
+            <strong> Description : <br /> </strong>
+            <div
+              class="description"
+              *ngFor="let action of selectedItem.actions"
+            >
+              <div class="desc">
+                <b>{{ action.editBy }} : </b> {{ action.description }}
+              </div>
+              <div class="date" style="width: auto">
+                <p>Last Modify: {{ getFormattedDate(action.timestamp) }}</p>
+              </div>
+            </div>
+          </mat-card-content>
+
+          <!--  -->
+
+          <!--  -->
+        </div>
+        <div style="width: 100%">
+          <mat-divider></mat-divider>
+          <mat-card-footer class="custom-footer">
+            <mat-card-actions>
+              <form
+                class="example-form"
+                [formGroup]="isResolved"
+                ngNativeValidate
+                *ngIf="!isUser"
+                
+              >
+                <mat-slide-toggle
+                  formControlName="isResolved"
+                  (change)="alertFormValues(selectedItem.id, isResolved.value.isResolved)"
+                  [checked]="selectedItem.isResolved"
+                  >
+                 <b> {{ selectedItem.isResolved ? "Resolved" : "Pending" }}</b>
+                </mat-slide-toggle>
+              </form>
+              <span *ngIf="!selectedItem.isResolved">
+                <button mat-button *ngIf="!isUser" (click)="roleDialog()">
+                  Forword
+                </button>
+                <button mat-button (click)="updateDialog(selectedItem)">
+                  Edit
+                </button>
+                <button mat-button *ngIf="!isUser">Delete</button>
+              </span>
+
+            </mat-card-actions>
+          </mat-card-footer>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

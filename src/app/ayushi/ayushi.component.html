@@ -1,0 +1,18 @@
+<mat-card class="example-card">
+    <mat-card-content>
+      <h2 class="example-h2">Result</h2>
+      <mat-progress-spinner
+        class="example-margin"
+        [color]="color"
+        [mode]="mode"
+        [value]="value"
+        role="progressbar"
+        aria-label="Loading, please wait."
+      >
+      </mat-progress-spinner>
+    </mat-card-content>
+  </mat-card>
+  
+
+  <button (click)="storeData()">Store Encrypted Data</button>
+  <button (click)="retrieveData()">Retrieve Decrypted Data</button>

@@ -1,0 +1,44 @@
+<div>
+
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="username">Username:</label>
+      <input type="text" id="username" formControlName="username">
+    </div>
+    
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" formControlName="email">
+    </div>
+    
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" id="password" formControlName="password">
+    </div>
+    
+    <div>
+      <label for="role">Role:</label>
+      <select id="role" formControlName="roles"  >
+        <option *ngFor="let role of roles" value="{{role.rolename}}">{{role.rolename}}</option>
+      </select>
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+</div>
+  <br>
+  <div>
+
+    <form [formGroup]="roleForm" (ngSubmit)="addRole()">
+      <label for="rolename">Enter Role Name:</label>
+      <input type="text" id="rolename" formControlName="rolename">
+      <div *ngIf="roleForm.get('rolename')?.errors?.['required']">
+        Role is required
+      </div>
+      <div *ngIf="roleForm.get('rolename')?.errors?.['minlength']">
+        Role must be at least 5 characters
+      </div>
+           
+      <button type="submit" [disabled]="roleForm.invalid">Submit</button>
+    </form>
+   
+  </div>

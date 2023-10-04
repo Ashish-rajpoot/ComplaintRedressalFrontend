@@ -1,0 +1,73 @@
+<div class="container register">
+  <div class="row">
+      <div class="col-sm-12 col-md-6 mx-auto text-center">
+        <div class="login">
+          <h1>Register Page</h1>
+        </div>
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+          <p>
+            <mat-form-field appearance="fill">
+              <mat-label>Provide UserName</mat-label>
+              <input
+                matInput
+                placeholder="User Name"
+                type="text"
+                id="username"
+                formControlName="username"
+                (input)="handleKeyUp($event)"
+                />
+              <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field appearance="fill">
+              <mat-label>Provide Email</mat-label>
+              <input
+                matInput
+                placeholder=" Email"
+                type="text"
+                id="email"
+                formControlName="email"
+                (input)="checkUser()"
+              />
+              <mat-icon matSuffix>alternate_email</mat-icon>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field appearance="fill">
+              <mat-label>Provide Password</mat-label>
+              <input
+                matInput
+                placeholder="Password"
+                type="password"
+                id="password"
+                formControlName="password"
+              />
+              <mat-icon matSuffix>lock</mat-icon>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field appearance="fill">
+              <mat-label>Select an option</mat-label>
+              <mat-select id="role" formControlName="roles">
+                <mat-option
+                  *ngFor="let role of roles"
+                  value="{{ role.rolename }}"
+                  >{{ role.rolename }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </p>
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="userForm.invalid"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+    <p class="downlink">Already have a account? <a routerLink="/login">Login</a></p>
+  </div>

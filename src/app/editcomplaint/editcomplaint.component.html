@@ -1,0 +1,23 @@
+<div>
+ 
+  <div mat-dialog-title><h2>Select To Forward</h2></div>
+
+<form [formGroup]="roleupdate" (ngSubmit)="updateRole()"  >
+  <div mat-dialog-content class="content">
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Select to Forward</mat-label>
+        <mat-select id="role" formControlName="roleId">
+          <mat-option *ngFor="let role of roles" [value]=" role.id">{{
+            role.rolename
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </p>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button type="button" (click)="onNoClick()">Cancel</button>
+    <button mat-raised-button color="primary" type="submit">Forward</button>
+  </div>
+</form>
+</div>
