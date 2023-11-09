@@ -13,3 +13,13 @@ width: 100%;
 z-index: 4;
 top: 0;
 }
+.header a{
+  text-decoration: none;
+  color: #fff;
+}
+
+mat-toolbar{
+  background-color: #6f0047;
+  color: #fff;
+  
+}

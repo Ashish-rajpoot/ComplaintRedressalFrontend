@@ -9,6 +9,9 @@ import { SecureserviceService } from './secureservice.service';
 export class SharedService {
   private isLoggedInSubject : BehaviorSubject<boolean> 
   public isLoggedIn$ : Observable<boolean>;
+
+  private currentPage : BehaviorSubject<string>;
+  public currentPage$ : Observable<string>;
   decryptedData!:any;
 
   constructor(private http:HttpClient, private secureService:SecureserviceService){
@@ -21,6 +24,10 @@ export class SharedService {
       // const isLoggedIn = false;
       this.isLoggedInSubject = new BehaviorSubject<boolean>(this.decryptedData);
       this.isLoggedIn$ = this.isLoggedInSubject.asObservable();
+
+      // const active page = home;
+      this.currentPage = new BehaviorSubject<string>("home");
+      this.currentPage$ = this.currentPage.asObservable();
 
     
   }
@@ -44,5 +51,12 @@ export class SharedService {
     }
   }
 
+  getCurrentPage(){
+    return this.currentPage;
+  }
+
+  setCurrentPage(value : string){
+    this.currentPage.next(value);
+  }
   
 }

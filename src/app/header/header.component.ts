@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnChanges, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
 import { SharedService } from '../services/shared.service';
 import { Subscription } from 'rxjs';
@@ -19,7 +19,14 @@ export class HeaderComponent {
   role!: string;
   private subscriptions!: Subscription;
 
-  constructor(private router: Router, private sharedService: SharedService, private secuerService:SecureserviceService) {
+  constructor(private router: Router, 
+    private sharedService: SharedService, 
+    private secuerService:SecureserviceService,
+    private activeRoute:ActivatedRoute) {
+    let page = window.location.href;
+    console.log(page)
+
+
     this.subscriptions = this.sharedService.isLoggedIn$.subscribe((value) => {
       console.log(value);
       this.isLoggedIn = value;
@@ -54,8 +61,5 @@ export class HeaderComponent {
     
     return false;
   }
-  
-
-  
-  
+    
 }
