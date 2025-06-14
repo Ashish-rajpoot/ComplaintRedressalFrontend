@@ -1,11 +1,17 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { User } from '../models/user';
 import { Role } from '../models/role';
 import { Router } from '@angular/router';
 import { getMatFormFieldMissingControlError } from '@angular/material/form-field';
+import { Role_URL } from '../constants/constant';
 
 @Component({
   selector: 'app-register',
@@ -13,8 +19,6 @@ import { getMatFormFieldMissingControlError } from '@angular/material/form-field
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
-  private User_URL = 'http://localhost:8081/api/register';
-  private Role_URL = 'http://localhost:8081/api/role';
   userForm!: FormGroup;
   roleForm!: FormGroup;
   roles!: any;
@@ -41,7 +45,7 @@ export class RegisterComponent {
       rolename: ['', [Validators.required, Validators.minLength(4)]],
     });
 
-    this.http.get(this.Role_URL).subscribe((data) => {
+    this.http.get(Role_URL).subscribe((data) => {
       this.roles = data;
     });
   }
@@ -58,7 +62,7 @@ export class RegisterComponent {
       const roles = this.userForm.value.roles;
 
       // Fetch role data from the server using HTTP GET request
-      this.http.get<Role>(`${this.Role_URL}/${roles}`).subscribe(
+      this.http.get<Role>(`${Role_URL}/${roles}`).subscribe(
         (data) => {
           console.log('Fetched Role Data:', data);
 
@@ -107,7 +111,7 @@ export class RegisterComponent {
         rolename: updaterolename,
       };
 
-      this.http.post(this.Role_URL, roleDetail).subscribe(
+      this.http.post(Role_URL, roleDetail).subscribe(
         (data) => {
           console.log('User registered successfully!', data);
           // Handle successful registration, e.g., show a success message, redirect, etc.

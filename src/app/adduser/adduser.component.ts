@@ -1,20 +1,10 @@
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { User } from '../models/user';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  FormControl,
-} from '@angular/forms';
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpHeaders,
-  HttpResponse,
-} from '@angular/common/http';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Role } from '../models/role';
-import { min, toArray } from 'rxjs';
+import { User } from '../models/user';
 import { UserService } from '../services/user.service';
+import { Role_URL } from '../constants/constant';
 
 @Component({
   selector: 'app-adduser',
@@ -22,19 +12,17 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./adduser.component.css'],
 })
 export class AdduserComponent {
-  private User_URL = 'http://localhost:8081/api/register';
-  private Role_URL = 'http://localhost:8081/api/role';
-  userForm !: FormGroup;
+  userForm!: FormGroup;
   roleForm!: FormGroup;
   roles!: any;
-  role!:any;
+  role!: any;
   errors: string[] = [];
 
-
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private userService: UserService) {
-   
-  }
-
+  constructor(
+    private formBuilder: FormBuilder,
+    private http: HttpClient,
+    private userService: UserService
+  ) {}
 
   ngOnInit() {
     this.userForm = this.formBuilder.group({
@@ -55,18 +43,19 @@ export class AdduserComponent {
       rolename: ['', [Validators.required, Validators.minLength(4)]],
     });
 
-    this.http.get(this.Role_URL).subscribe(data => {this.roles = data});
-    console.log(this.roles)
-    
+    this.http.get(Role_URL).subscribe((data) => {
+      this.roles = data;
+    });
+    console.log(this.roles);
   }
 
   registerUser(user: User) {}
   onSubmit() {
     if (this.userForm.valid) {
       const roles = this.userForm.value.roles;
-  
+
       // Fetch role data from the server using HTTP GET request
-      this.http.get<Role>(`${this.Role_URL}/${roles}`).subscribe((data) => {
+      this.http.get<Role>(`${Role_URL}/${roles}`).subscribe((data) => {
         console.log('Fetched Role Data:', data);
 
         // After getting the role data, construct the newUser object with the correct role data
@@ -74,22 +63,21 @@ export class AdduserComponent {
           username: this.userForm.value.username,
           email: this.userForm.value.email,
           password: this.userForm.value.password,
-          roles: [data]
+          roles: [data],
         };
-  
+
         // Set the headers for the request (e.g., content type)
         // const headers = new HttpHeaders({
         //   'Content-Type': 'application/json'
         // });
 
         console.log('newUser:', newUser);
-  
+
         // Make the HTTP POST request
         this.userService.addUser(newUser).subscribe(
           (data) => {
             console.log('User registered successfully:', data);
-          }
-          ,
+          },
           (error: HttpErrorResponse) => {
             if (error.status === 400) {
               console.log(error.error);
@@ -103,22 +91,21 @@ export class AdduserComponent {
     }
   }
 
-
   addRole() {
     if (this.roleForm.valid) {
       // Perform the form submission or API call here
-      let updaterolename ="ROLE_" + (this.roleForm.value.rolename.toUpperCase()).substring(0,4);
-      
-      const roleDetail :  Role ={
+      let updaterolename =
+        'ROLE_' + this.roleForm.value.rolename.toUpperCase().substring(0, 4);
+
+      const roleDetail: Role = {
         rolename: updaterolename,
       };
-    
-      this.http.post(this.Role_URL, roleDetail).subscribe(
+
+      this.http.post(Role_URL, roleDetail).subscribe(
         (data) => {
           console.log('User registered successfully!', data);
           // Handle successful registration, e.g., show a success message, redirect, etc.
-        }
-        ,
+        },
         (error: HttpErrorResponse) => {
           if (error.status === 400) {
             console.log('User registration. Error: ');
@@ -127,7 +114,6 @@ export class AdduserComponent {
           }
         }
       );
-      
     }
   }
 }

@@ -6,8 +6,7 @@ import { SharedService } from '../services/shared.service';
 import { UserService } from '../services/user.service';
 import { SecureserviceService } from '../services/secureservice.service';
 import { catchError, throwError } from 'rxjs';
-
-const AUTH_URL = 'http://localhost:8081/api/auth';
+import { AUTH_URL } from '../constants/constant';
 
 @Component({
   selector: 'app-login',
