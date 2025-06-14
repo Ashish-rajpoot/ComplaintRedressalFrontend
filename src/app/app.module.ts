@@ -32,7 +32,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { AyushiComponent } from './ayushi/ayushi.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatRadioModule} from '@angular/material/radio';
-import { GlobalErrorHandlerService } from './services/global-error-handler.service';
+// import { GlobalErrorHandlerService } from './services/global-error-handler.service';
 import { GetusersComponent } from './getusers/getusers.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -86,10 +86,10 @@ import { ProfileComponent } from './profile/profile.component';
       useClass: CustominterceptorInterceptor,
       multi: true,
     } ,
-    {
-      provide: ErrorHandler,
-      useClass: GlobalErrorHandlerService
-    }
+    // {
+    //   provide: ErrorHandler,
+    //   useClass: GlobalErrorHandlerService
+    // }
    ],
   bootstrap: [AppComponent],
 })

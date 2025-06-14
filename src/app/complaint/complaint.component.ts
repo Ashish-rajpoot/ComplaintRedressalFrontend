@@ -6,6 +6,7 @@ import { UserService } from '../services/user.service';
 import { Complaint } from '../models/complaint';
 import { ComplaintService } from '../services/complaint.service';
 import { Router } from '@angular/router';
+import { SecureserviceService } from '../services/secureservice.service';
 
 @Component({
   selector: 'app-complaint',
@@ -18,24 +19,40 @@ export class ComplaintComponent {
   roles: any;
   user!: Observable<any>;
   users!: any;
+  isEmail!:any;
+
   
   constructor(
     private http: HttpClient,
     private formBuilder: FormBuilder,
     private userService: UserService,
     private complaintService: ComplaintService,
-    private router: Router
-    ) {}
-    
-    ngOnInit() {
-      this.complaintForm = this.formBuilder.group({
-        email: ['', Validators.required],
-        description: ['', Validators.required],
-        assignedTo: ['', Validators.required],
-      });
-      
+    private router: Router,
+    private secureService :SecureserviceService
+    ) {
+      let encryptedEmail = localStorage.getItem("email");
+      if(encryptedEmail){
+        let decryptedEmail = secureService.decrypt(encryptedEmail);
+        this.isEmail = decryptedEmail;
+        console.log(decryptedEmail);
+        this.complaintForm = this.formBuilder.group({
+          email: [decryptedEmail, Validators.required],
+          description: ['', Validators.required],
+          assignedTo: ['', Validators.required],
+        });
+      }
+
+        this.complaintForm = this.formBuilder.group({
+          email: ['', Validators.required],
+          description: ['', Validators.required],
+          assignedTo: ['', Validators.required],
+        });
       this.loadRoles();
+
     }
+    
+    // ngOnInit() {
+    // }
     
     // Fetch and populate roles
     loadRoles() {

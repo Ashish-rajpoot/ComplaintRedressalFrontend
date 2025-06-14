@@ -19,7 +19,6 @@
         class="btns"
         color="black"
         routerLink="{{ link.path }}"
-        (click)="page(link.path)"
       >
         {{ link.label }}
       </button>
@@ -35,7 +34,6 @@
         color="black"
         [routerLink]="link.path"
         [disabled]="!hasRole(link.role)"
-        (click)="page(link.path)"
         >
         {{ link.label }}
       </button>

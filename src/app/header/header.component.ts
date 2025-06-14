@@ -24,9 +24,6 @@ export class HeaderComponent {
     private secuerService:SecureserviceService,
     private activeRoute:ActivatedRoute) {
     let page = window.location.href;
-    console.log(page)
-
-
     this.subscriptions = this.sharedService.isLoggedIn$.subscribe((value) => {
       console.log(value);
       this.isLoggedIn = value;
